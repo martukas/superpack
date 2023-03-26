@@ -1,6 +1,6 @@
 # SuperPack 
 
-Think of this as a self-curated multi-platform Ninite for both Windows and Linux. if you find yourself performing a lot of boilerplate installs on every new system, this, in conjunction with something like [dotbot](https://github.com/anishathalye/dotbot/) might be the right solution for you. 
+This is a utility for custom multi-platform package management. Something like [Ninite](https://ninite.com/), but for both Windows and Linux, except you can configure your own manifests to install from any existing package manager or have it run custom build/install scripts. If you find yourself performing a lot of boilerplate bootstrapping on every new system, this, in conjunction with something like [dotbot](https://github.com/anishathalye/dotbot/) might be the right solution for you. Which is [exactly](https://github.com/martukas/dotfiles) how I use it.
 
 ![screenshot](screenshot.png)
 
@@ -21,9 +21,9 @@ Think of this as a self-curated multi-platform Ninite for both Windows and Linux
 This solves my particular use case:
 * installing same or similar sets of programs on fresh machines
 * dealing with different package managers, such as `apt`, `snap`, `winget`, with subtly different syntax, and not caring to remember which package resides where
-* the need to occasionally build and install from source, with custom settings rather than using existing packages
-* something like Ninite seems outdated and does not provide some programs I need
-* I need to do this in both Linux and Windows
+* the need to occasionally build and install from source, with custom configurations rather than using existing packages
+* something like Ninite seems outdated and does not provide many programs I need
+* I want to do this in both Linux and Windows
 * I sometimes need to do this in CLI only, e.g. on a remote machine, without a window manager
 * I want to curate my own list of programs I will likely need, and keep them categorized in my own way
 * Increasing overlap in configurations across OSs, in particular with ssh, git and Windows Linux Subsystem, makes it increasingly convenient to maintain a common bootstrapper for packages as well
@@ -65,7 +65,7 @@ pipenv run python ./superpack/superpack.py .\examples\packages.json
 
 If you try to run this from something like ConEmu, the UI library may not render correctly, so it's recommended you run it from a vanilla `pwsh` terminal. If you need to integrate this command into some install script that you might run from funky places, you can always force the creation of a new terminal with the following:
 ```powershell
-Start-Process pwsh -WindowStyle Maximized -ArgumentList `
+Start-Process pwsh -ArgumentList `
 "-Command & {pipenv run python ./superpack/superpack.py .\examples\packages.json}"
 ```
 
@@ -131,7 +131,7 @@ Commands in this field will be run when attempting to install the package. This 
 
 ## Implementation
 
-I am using mostly [textual](https://github.com/textualize/textual/) for the TUI, and a bit of [rich](https://github.com/Textualize/rich) for some debug output.
+I am mainly using [textual](https://github.com/textualize/textual/) for the UI, and a bit of [rich](https://github.com/Textualize/rich) for debug output.
 
 ## Roadmap
 
