@@ -1,0 +1,62 @@
+Screen {
+    align: center middle;
+}
+MyApp {
+}
+BundlerUi {
+    width: 95%;
+    height: 95%;
+    margin: 1;
+}
+PackageList {
+    background: $panel;
+    border: tall $primary;
+    content-align: center middle;
+}
+Tabs {
+    dock: top;
+}
+
+PackageWidget {
+    layout: horizontal;
+    content-align: center middle;
+    color: $text;
+}
+
+Button {
+    width: 12;
+}
+
+Label {
+    content-align: center middle;
+}
+
+#pkg_id {
+    width: 40;
+    border: $accent-darken-3;
+    content-align: left middle;
+}
+
+.installed #pkg_id {
+    color: $success-darken-3;
+}
+
+#pkg_descr {
+    width: 40;
+    content-align: left middle;
+    margin: 1;
+}
+
+.installed #pkg_descr {
+    color: $text-muted;
+}
+
+.installed #install {
+    color: $text-disabled;
+}
+
+#pkg_script {
+    content-align: right middle;
+    margin: 1;
+}
+

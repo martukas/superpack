@@ -1,0 +1,22 @@
+[
+  {
+    "id": "dummy",
+    "descr": "Dummy test package",
+    "category": "xtras",
+    "type": "posix",
+    "check": "which nonexistentscript",
+    "install": "./examples/custom.sh test"
+  },
+  {
+    "id": "build-essential",
+    "descr": "build-essential for compiling C/C++",
+    "category": "dev-admin",
+    "type": "apt"
+  },
+  {
+    "id": "firefox",
+    "descr": "Firefox browser",
+    "category": "web",
+    "type": "snap"
+  }
+]
