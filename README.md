@@ -21,7 +21,7 @@ Think of this as a self-curated multi-platform Ninite for both Windows and Linux
 This solves my particular use case:
 * installing same or similar sets of programs on fresh machines
 * dealing with different package managers, such as `apt`, `snap`, `winget`, with subtly different syntax, and not caring to remember which package resides where
-* the need to build and install from source, with custom scripts rather than using an existing package manager
+* the need to occasionally build and install from source, with custom settings rather than using existing packages
 * something like Ninite seems outdated and does not provide some programs I need
 * I need to do this in both Linux and Windows
 * I sometimes need to do this in CLI only, e.g. on a remote machine, without a window manager
