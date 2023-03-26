@@ -2,9 +2,21 @@
 
 Think of this as a self-curated multi-platform Ninite for both Windows and Linux. if you find yourself performing a lot of boilerplate installs on every new system, this, in conjunction with something like [dotbot](https://github.com/anishathalye/dotbot/) might be the right solution for you. 
 
+![screenshot](screenshot.png)
+
 ---
 
-## Motivation
+- [Rationale](#rationale)
+- [Limitations](#limitations)
+- [Running](#running)
+- [Package definitions](#package-definitions)
+- [Examples](examples)
+- [Implementation](#implementation)
+- [Roadmap](#roadmap)
+
+---
+
+## Rationale
 
 This solves my particular use case:
 * installing same or similar sets of programs on fresh machines
@@ -14,6 +26,7 @@ This solves my particular use case:
 * I need to do this in both Linux and Windows
 * I sometimes need to do this in CLI only, e.g. on a remote machine, without a window manager
 * I want to curate my own list of programs I will likely need, and keep them categorized in my own way
+* Increasing overlap in configurations across OSs, in particular with ssh, git and Windows Linux Subsystem, makes it increasingly convenient to maintain a common bootstrapper for packages as well
 
 ## Limitations
 
@@ -52,12 +65,13 @@ pipenv run python ./superpack/superpack.py .\examples\packages.json
 
 If you try to run this from something like ConEmu, the UI library may not render correctly, so it's recommended you run it from a vanilla `pwsh` terminal. If you need to integrate this command into some install script that you might run from funky places, you can always force the creation of a new terminal with the following:
 ```powershell
-Start-Process pwsh -WindowStyle Maximized -ArgumentList "-Command & {pipenv run python ./superpack/superpack.py .\examples\packages.json}"
+Start-Process pwsh -WindowStyle Maximized -ArgumentList `
+"-Command & {pipenv run python ./superpack/superpack.py .\examples\packages.json}"
 ```
 
 ### Options
 
-In addition to the manifest path, you may also add the following keywords for special debug behavior:
+In addition to the manifest path, you may also add the following keywords to run it with special debug behavior:
 * `read` - will only read the manifest and quit immediately, just to test that it parses right
 * `-f` - will force the HandlerWrapper to load all package handlers, including ones not compatible with the detected OS
 * `check` - will load the manifest and check for the installation status of all packages and then quit immediately, without running the UI
@@ -79,7 +93,7 @@ You should create a JSON file with some package definitions like the ones found 
 
 ### id
 
-The identifier should be unique, and in case of packages that are wrappers/references to other package management systems, this "id" should be the actual package name. This will save you the time and effort of having to define "check" and "install" commands, as those will be generated for you.
+The identifier should be unique, and in case of packages that are wrappers/references to other package management systems, this "id" should be the actual package name. This will save you the time and effort of having to write boilerplate "check" and "install" commands, as those will be generated for you.
 
 ### descr
 
@@ -97,9 +111,9 @@ This should be one of the valid `MetaPackage.Type` Enum values, which at this ti
 * snap
 * winget
 
-For the 2 shell types -- `posix` and `powershell` -- the values of "check" and "install" will be used as commands with an invocation of the appropriate shell. Avoid multi-line commands. Instead, create a custom shell script, like the ones you see under [examples](examples).
+For the 2 shell types - `posix` and `powershell` - the values of "check" and "install" will be used as commands with an invocation of the appropriate shell. Avoid multi-line commands. Instead, create a custom shell script, like the ones you see under [examples](examples).
 
-For the wrapped package managers, i.e. `apt`, `snap` and `winget`, you the `id` field will be used with boilerplate check and installation commands. If there are additional steps on top of the expected standard installation method, you may also provide an additional script to run in "install", which the particular handler will run afterward. Otherwise, "install" may be left empty.
+For the wrapped package managers - `apt`, `snap` and `winget` - the `id` field will be used with boilerplate check and installation commands. If there are additional steps on top of the expected standard installation method, you may also provide an additional script to run in "install", which the particular handler will run afterwards. Otherwise, "install" may be left empty.
 
 ### check
 
@@ -109,7 +123,7 @@ This will only be run for `posix` and `powershell` packages. As such, it is of u
 
 ### install
 
-If non-empty, commands in this field will be run when attempting to install the package. This script will always be run for `posix` and `powershell` types. For types referencing existing package management systems, this script will be delegated to the "parent" shell system, i.e.
+Commands in this field will be run when attempting to install the package. This script will always be run for `posix` and `powershell` types. For types referencing existing package management systems, this script will be delegated to the "parent" shell system, i.e.
 * apt -> posix
 * snap -> posix
 * winget -> powershell
@@ -128,6 +142,7 @@ Here are some features/ideas I would like to implement if I ever get around to i
 * one package definition can reference multiple alternative managers, so that e.g. one manifest can be kept for all possible systems
 * define packages in yml instead of json? 
 * Function to update/upgrade some or all packages
+* More and better keybindings
 * Support for macOS
 * Support for other Linux distros
 
