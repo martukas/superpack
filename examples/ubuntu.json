@@ -20,6 +20,12 @@
     "type": "snap"
   },
   {
+    "id": "remmina",
+    "descr": "Remmina remote desktop client",
+    "category": "dev-admin",
+    "type": "apt"
+  },
+  {
     "id": "a01",
     "descr": "A01",
     "category": "A",
