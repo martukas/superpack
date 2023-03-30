@@ -1,20 +1,29 @@
 ---
-- id: dummy
-  descr: Dummy test package
-  category: xtras
-  type: powershell
-  check: winget list -q nonexistent | findstr 'nothingtofind'
-  install: ".\\examples\\custom.ps1 test"
-- id: Maximus5.ConEmu
-  descr: Conemu terminal
-  category: GUI
-  type: winget
-  install: ".\\examples\\custom.ps1 startup ConEmu C:\\Program Files\\ConEmu\\ConEmu64.exe"
-- id: Notepad++.Notepad++
-  descr: Notepad++ text editor
-  category: dev-admin
-  type: winget
-- id: Mozilla.Firefox
-  descr: Firefox browser
-  category: web
-  type: winget
+- defaults:
+    type: winget
+  packages:
+    - id: Notepad++.Notepad++
+      descr: Notepad++ text editor
+      category: dev-admin
+    - id: Mozilla.Firefox
+      descr: Firefox browser
+      category: web
+    - id: Maximus5.ConEmu
+      descr: Conemu terminal
+      category: GUI
+      install: ".\\examples\\custom.ps1 startup ConEmu C:\\Program Files\\ConEmu\\ConEmu64.exe"
+- defaults:
+    type: powershell
+  packages:
+    - id: dummy1
+      descr: Dummy test package 1
+      category: xtras
+      type: powershell
+      check: winget list -q nonexistent | findstr 'nothingtofind'
+      install: ".\\examples\\custom.ps1 test"
+    - id: dummy2
+      descr: Dummy test package 2
+      category: xtras
+      type: powershell
+      check: winget list -q nonexistent | findstr 'nothingtofind_either'
+      install: ".\\examples\\custom.ps1 test"

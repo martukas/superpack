@@ -5,17 +5,9 @@ from package_handler import HandlerWrapper
 from superpack_widgets import SuperPackUI
 from typing import List
 from textual.app import App, ComposeResult
-from textual.widgets import Header, Footer, TextLog
+from textual.widgets import Header, Footer
 from rich.console import Console
-import yaml
 import sys
-
-
-def read_manifest(file_path: str) -> List:
-    file = open(file_path, "r")
-    ret = [meta_package.MetaPackage.from_json(p) for p in yaml.unsafe_load(file)]
-    file.close()
-    return ret
 
 
 class MyApp(App):
@@ -45,8 +37,8 @@ if __name__ == "__main__":
     console = Console(markup=True, emoji=True)
     manifest = []
     if len(sys.argv) > 1:
-        json_path = sys.argv[1]
-        manifest = read_manifest(json_path)
+        manifest_path = sys.argv[1]
+        manifest = meta_package.read_manifest(manifest_path)
     if len(sys.argv) > 2 and sys.argv[2] == "read":
         console.print(manifest)
         exit(0)
