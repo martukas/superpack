@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from enum import Enum
-import json
+import yaml
 
 
 class MetaPackage:
@@ -27,7 +27,7 @@ class MetaPackage:
         self.install_script: str = ""
 
     @staticmethod
-    def from_json(data: json):
+    def from_yaml(data: yaml):
         ret = MetaPackage()
         ret.id = data["id"]
         ret.description = data["descr"]

@@ -7,13 +7,13 @@ from typing import List
 from textual.app import App, ComposeResult
 from textual.widgets import Header, Footer, TextLog
 from rich.console import Console
-import json
+import yaml
 import sys
 
 
 def read_manifest(file_path: str) -> List:
     file = open(file_path, "r")
-    ret = [meta_package.MetaPackage.from_json(p) for p in json.load(file)]
+    ret = [meta_package.MetaPackage.from_json(p) for p in yaml.unsafe_load(file)]
     file.close()
     return ret
 
