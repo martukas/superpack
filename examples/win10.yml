@@ -14,16 +14,13 @@
       install: ".\\examples\\custom.ps1 startup ConEmu C:\\Program Files\\ConEmu\\ConEmu64.exe"
 - defaults:
     type: powershell
+    category: xtras
   packages:
     - id: dummy1
       descr: Dummy test package 1
-      category: xtras
-      type: powershell
       check: winget list -q nonexistent | findstr 'nothingtofind'
       install: ".\\examples\\custom.ps1 test"
     - id: dummy2
       descr: Dummy test package 2
-      category: xtras
-      type: powershell
       check: winget list -q nonexistent | findstr 'nothingtofind_either'
       install: ".\\examples\\custom.ps1 test"

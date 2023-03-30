@@ -4,7 +4,6 @@ from enum import Enum
 import yaml
 from typing import List
 
-from rich.console import Console
 
 class MetaPackage:
 
@@ -66,13 +65,10 @@ def from_yaml(data: yaml, template: MetaPackage = MetaPackage()):
 
 
 def read_manifest(file_path: str) -> List:
-    console = Console(markup=True, emoji=True)
     with open(file_path, "r") as f:
         data = yaml.unsafe_load(f)
-    console.print(data)
     ret = []
     for section in data:
-        console.print(f"section={section}")
         template = MetaPackage()
         if "defaults" in section:
             template = from_yaml(section["defaults"])
