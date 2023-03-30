@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from textual.scroll_view import ScrollView
 from meta_package import MetaPackage
 from package_handler import HandlerWrapper
 from typing import List
@@ -40,7 +40,7 @@ class PackageList(Widget):
             cb.remove()
         for package in data:
             self.mount(PackageWidget(package))
-        self.refresh()
+        self.refresh(layout=True)
 
 
 class SuperPackUI(Widget):
@@ -75,6 +75,7 @@ class SuperPackUI(Widget):
             cbl.visible = True
             category = event.tab.id
             packages = [v for v in self.manifest if v.category == category]
+            packages.sort(key=lambda x: x.description)
             cbl.new_data(packages)
 
     def add_data(self, manifest: List) -> None:

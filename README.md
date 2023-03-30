@@ -60,13 +60,13 @@ pipenv run python ./superpack/superpack.py ./examples/ubuntu.json
 
 **In Windows 10**
 ```powershell
-pipenv run python .\superpack\superpack.py .\examples\packages.json
+pipenv run python .\superpack\superpack.py .\examples\win10.json
 ```
 
 If you try to run this from something like ConEmu, the UI library may not render correctly, so it's recommended you run it from a vanilla `pwsh` terminal. If you need to integrate this command into some install script that you might run from funky places, you can always force the creation of a new terminal with the following:
 ```powershell
 Start-Process pwsh -ArgumentList `
-"-Command & {pipenv run python ./superpack/superpack.py .\examples\packages.json}"
+"-Command & {pipenv run python ./superpack/superpack.py .\examples\win10.json}"
 ```
 
 ### Options
@@ -136,14 +136,14 @@ I am mainly using [textual](https://github.com/textualize/textual/) for the UI, 
 ## Roadmap
 
 Here are some features/ideas I would like to implement if I ever get around to it:
-* make sure this deploys as proper Python package
-* Add scroll bars to pages
+* better way of checking installation status of apt packages
 * make uninstall/remove possible
 * install multiple packages at once, after marking them as targets in UI
 * one package definition can reference multiple alternative managers, so that e.g. one manifest can be kept for all possible systems
 * define packages in yml instead of json? 
 * Function to update/upgrade some or all packages
 * More and better keybindings
+* make sure this deploys as proper Python package
 * Support for macOS
 * Support for other Linux distros
 

@@ -12,6 +12,7 @@ PackageList {
     background: $panel;
     border: tall $primary;
     content-align: center middle;
+    overflow: auto auto;
 }
 Tabs {
     dock: top;
