@@ -51,6 +51,8 @@ You will need to:
 
 ## Running
 
+First run `pipenv install` to get dependencies.
+
 You may test it out with the minimal example manifests included in this repo.
 
 **In Ubuntu**
@@ -136,11 +138,10 @@ I am mainly using [textual](https://github.com/textualize/textual/) for the UI, 
 ## Roadmap
 
 Here are some features/ideas I would like to implement if I ever get around to it:
-* better way of checking installation status of apt packages
+* define packages in yml instead of json?
+* one package definition can reference multiple alternative managers, so that e.g. one manifest can be kept for all possible systems
 * make uninstall/remove possible
 * install multiple packages at once, after marking them as targets in UI
-* one package definition can reference multiple alternative managers, so that e.g. one manifest can be kept for all possible systems
-* define packages in yml instead of json? 
 * Function to update/upgrade some or all packages
 * More and better keybindings
 * make sure this deploys as proper Python package

@@ -46,11 +46,14 @@ class AptHandler:
 
     @staticmethod
     def check_all(packages: List[MetaPackage]) -> None:
-        all_packages = shell_wrapper.run_get_posix("dpkg --get-selections").split('\n')
+        all_packages = [
+            a.split()
+            for a in shell_wrapper.run_get_posix("dpkg --get-selections").split('\n')
+            if len(a)
+        ]
         for package in packages:
             if package.type == MetaPackage.Type.apt:
-                candidates = [a for a in all_packages if a.startswith(package.id) and a.endswith("install")]
-                package.installed = len(candidates) > 0
+                package.installed = any(t[0] == package.id and t[-1] == "install" for t in all_packages)
 
 
 class SnapHandler:
