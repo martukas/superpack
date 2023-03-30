@@ -40,15 +40,20 @@ class AptHandler:
 
     @staticmethod
     def check(package: MetaPackage) -> None:
-        ret = shell_wrapper.run_get_posix(f"dpkg -l")
-        package.installed = package.id in ret
+        cmd = f'dpkg --get-selections | grep -q "^{package.id}[[:space:]]*install$"'
+        ret = shell_wrapper.run_get_posix(cmd)
+        package.installed = len(ret) > 0
 
     @staticmethod
     def check_all(packages: List[MetaPackage]) -> None:
-        all_packages = shell_wrapper.run_get_posix("dpkg -l")
+        all_packages = [
+            a.split()
+            for a in shell_wrapper.run_get_posix("dpkg --get-selections").split('\n')
+            if len(a)
+        ]
         for package in packages:
             if package.type == MetaPackage.Type.apt:
-                package.installed = package.id in all_packages
+                package.installed = any(t[0] == package.id and t[-1] == "install" for t in all_packages)
 
 
 class SnapHandler:
