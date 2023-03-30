@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 textual = "*"
 rich = "*"
+pyyaml = "*"
 
 [dev-packages]
 "textual[dev]" = "*"

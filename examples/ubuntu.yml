@@ -1,0 +1,45 @@
+---
+- packages:
+    - id: dummy
+      descr: Dummy test package
+      category: xtras
+      type: posix
+      check: which nonexistentscript
+      install: "./examples/custom.sh test"
+    - id: firefox
+      descr: Firefox browser
+      category: web
+      type: snap
+- defaults:
+    type: apt
+    category: dev-admin
+  packages:
+    - id: build-essential
+      descr: build-essential for compiling C/C++
+    - id: remmina
+      descr: Remmina remote desktop client
+- defaults:
+    type: posix
+    category: A
+  packages:
+    - id: a01
+    - id: a04
+    - id: a05
+    - id: a02
+    - id: a03
+    - id: a06
+    - id: a07
+    - id: a08
+    - id: a09
+    - id: a10
+    - id: a11
+    - id: a12
+    - id: a13
+    - id: a14
+    - id: a15
+    - id: a16
+    - id: a17
+    - id: a18
+    - id: a19
+    - id: a20
+    - id: a21

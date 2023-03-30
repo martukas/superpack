@@ -57,18 +57,18 @@ You may test it out with the minimal example manifests included in this repo.
 
 **In Ubuntu**
 ```shell
-pipenv run python ./superpack/superpack.py ./examples/ubuntu.json
+pipenv run python ./superpack/superpack.py ./examples/ubuntu.yml
 ```
 
 **In Windows 10**
 ```powershell
-pipenv run python .\superpack\superpack.py .\examples\win10.json
+pipenv run python .\superpack\superpack.py .\examples\win10.yml
 ```
 
 If you try to run this from something like ConEmu, the UI library may not render correctly, so it's recommended you run it from a vanilla `pwsh` terminal. If you need to integrate this command into some install script that you might run from funky places, you can always force the creation of a new terminal with the following:
 ```powershell
 Start-Process pwsh -ArgumentList `
-"-Command & {pipenv run python ./superpack/superpack.py .\examples\win10.json}"
+"-Command & {pipenv run python ./superpack/superpack.py .\examples\win10.yml}"
 ```
 
 ### Options
@@ -80,17 +80,20 @@ In addition to the manifest path, you may also add the following keywords to run
 
 ## Package definitions
 
-You should create a JSON file with your package definitions like the ones found in the [examples](examples) directory. For example, a package definition looks like:
+You should create a YAML file with your package definitions like the ones found in the [examples](examples) directory. For example:
 
-```json
-{
-    "id": "dummy",
-    "descr": "Dummy test package",
-    "category": "xtras",
-    "type": "posix",
-    "check": "which nonexistentscript",
-    "install": "./examples/custom.sh test"
-}
+```yaml
+- packages:
+    - id: firefox
+      descr: Firefox browser
+      category: web
+      type: snap
+    - id: dummy
+      descr: Dummy test package
+      category: xtras
+      type: posix
+      check: which nonexistentscript
+      install: "./examples/custom.sh test"
 ```
 
 ### id
@@ -113,22 +116,38 @@ This should be one of the valid `MetaPackage.Type` Enum values, which at this ti
 * snap
 * winget
 
-For the 2 shell types - `posix` and `powershell` - the values of "check" and "install" will be used as commands with an invocation of the appropriate shell. Avoid multi-line commands. Instead, create a custom shell script, like the ones you see under [examples](examples).
+For the 2 shell types - "posix" and "powershell" - the values of `check` and `install` will be used as commands with an invocation of the appropriate shell. Avoid multi-line commands. Instead, create a custom shell script, like the ones you see under [examples](examples).
 
-For the wrapped package managers - `apt`, `snap` and `winget` - the `id` field will be used with boilerplate check and installation commands. If there are additional steps on top of the expected standard installation method, you may also provide an additional script to run in "install", which the particular handler will run afterwards. Otherwise, "install" may be omitted.
+For the wrapped package managers - "apt", "snap" and "winget" - the `id` field will be used with boilerplate check and installation commands. If there are additional steps on top of the expected standard installation method, you may also provide an additional script to run in `install`, which the particular handler will run afterwards. Otherwise, `install` may be omitted.
 
 ### check
 
-This will only be run for `posix` and `powershell` packages, so it should be used for custom packages installed with scripts. The command should answer whether the said package has been installed. This could be a check for the presence of an executable, or anything that you consider good evidence.
+This will only be run for "posix" and "powershell" packages, so it should be used for custom packages installed with scripts. The command should answer whether the said package has been installed. This could be a check for the presence of an executable, or anything that you consider good evidence.
 * If the package is PRESENT, the script should return a NON-EMPTY string
 * if the package is NOT present, it should return an EMPTY string.
 
 ### install
 
-Commands in this field will be run when attempting to install the package. This script will always be run for `posix` and `powershell` types. For types referencing existing package management systems, it will be run if non-empty, and will be delegated to the "parent" shell handler, i.e.
+Commands in this field will be run when attempting to install the package. This script will always be run for "posix" and "powershell" types. For types referencing existing package management systems, it will be run if non-empty, and will be delegated to the "parent" shell handler, i.e.
 * apt -> posix
 * snap -> posix
 * winget -> powershell
+
+### sections and defaults
+
+The YAML file may consist of any number of sections, each with a `packages:` array and optionally a `defaults:` definition, which cna define a template for all the packages in that section. For example:
+
+```yaml
+- defaults:
+    type: apt
+    category: dev-admin
+  packages:
+  - id: build-essential
+  - id: remmina
+    descr: Remmina remote desktop client
+```
+
+This will create 2 packages, both of which will be installed with "apt" and both will belong to the "dev-admin" category. Their id's will differ. One of them also ommits the `descr` field. Each individual package definition in the section can still override the defaults, but this might make reading and maintaining it more confusing. Sections and defaults allow for more concise manifests. 
 
 
 ## Implementation
@@ -137,11 +156,10 @@ I am mainly using [textual](https://github.com/textualize/textual/) for the UI, 
 
 ## Roadmap
 
-Here are some features/ideas I would like to implement if I ever get around to it:
-* define packages in yml instead of json?
-* one package definition can reference multiple alternative managers, so that e.g. one manifest can be kept for all possible systems
 * make uninstall/remove possible
 * install multiple packages at once, after marking them as targets in UI
+Here are some features/ideas I would like to implement if I ever get around to it:
+* one package definition can reference multiple alternative managers, so that e.g. one manifest can be kept for all possible systems
 * Function to update/upgrade some or all packages
 * More and better keybindings
 * make sure this deploys as proper Python package
