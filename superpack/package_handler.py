@@ -40,9 +40,12 @@ class AptHandler:
 
     @staticmethod
     def check(package: MetaPackage) -> None:
-        cmd = f'dpkg --get-selections | grep -q "^{package.id}[[:space:]]*install$"'
-        ret = shell_wrapper.run_get_posix(cmd)
-        package.installed = len(ret) > 0
+        all_packages = [
+            a.split()
+            for a in shell_wrapper.run_get_posix("dpkg --get-selections").split('\n')
+            if len(a)
+        ]
+        package.installed = any(t[0] == package.id and t[-1] == "install" for t in all_packages)
 
     @staticmethod
     def check_all(packages: List[MetaPackage]) -> None:
