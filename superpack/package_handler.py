@@ -33,7 +33,7 @@ class AptHandler:
 
     @staticmethod
     def install(package: MetaPackage) -> None:
-        script = f"sudo apt --install-suggests install {package.id}"
+        script = f"sudo apt --yes install {package.id}"
         if package.install_script:
             script += " && " + package.install_script
         PosixHandler.run(script)
