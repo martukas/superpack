@@ -1,0 +1,23 @@
+repos:
+- repo: https://github.com/psf/black
+  rev: 23.3.0
+  hooks:
+  - id: black
+    # We can specify a Python version below, but this requires everyone to have
+    # specifically that version available.  Given that just getting everyone to
+    # have py3 was a pain, I want to see if we can leave the version
+    # unspecified without the formatting diverging between people (which would
+    # be a pain).
+    # language_version: python3.7
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+  - id: check-yaml
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+
+- repo: https://github.com/Lucas-C/pre-commit-hooks
+  rev: v1.5.1
+  hooks:
+    - id: remove-crlf
