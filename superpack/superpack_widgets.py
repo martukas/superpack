@@ -9,15 +9,14 @@ import os
 
 
 class PackageWidget(Static):
-
     def __init__(
-            self,
-            data: MetaPackage,
-            *,
-            name: str | None = None,
-            id: str | None = None,
-            classes: str | None = None,
-            disabled: bool = False,
+        self,
+        data: MetaPackage,
+        *,
+        name: str | None = None,
+        id: str | None = None,
+        classes: str | None = None,
+        disabled: bool = False,
     ):
         super().__init__(name=name, id=id, classes=classes, disabled=disabled)
         self.package = data
@@ -44,7 +43,6 @@ class PackageList(Widget):
 
 
 class SuperPackUI(Widget):
-
     manifest: List = {}
     handlers = HandlerWrapper()
 
