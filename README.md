@@ -1,5 +1,6 @@
 # SuperPack
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/martukas/superpack/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/martukas/superpack/tree/main)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Debian](https://img.shields.io/badge/-Debian-A81D33?logo=debian)](https://www.debian.org/)
 [![Windows10](https://img.shields.io/badge/-Windows-0078D6?logo=windows)](https://www.microsoft.com/en-us/software-download/windows10%20)
