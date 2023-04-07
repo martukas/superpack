@@ -20,6 +20,6 @@ jobs:
             pre-commit run --show-diff-on-failure --files $changed_files
 
 workflows:
-  ci-tests:
+  circle-ci-tests:
     jobs:
       - pre-commit-checks
