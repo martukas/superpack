@@ -2,7 +2,7 @@
 
 [![Debian](https://img.shields.io/badge/-Debian-A81D33?logo=debian)](https://www.debian.org/)
 [![Windows10](https://img.shields.io/badge/-Windows-0078D6?logo=windows)](https://www.microsoft.com/en-us/software-download/windows10%20)
-[![macOS](https://img.shields.io/badge/-macOS-000000?logo=apple)](https://www.apple.com/macos/)
+[![macOS](https://img.shields.io/badge/-macOS-222222?logo=apple)](https://www.apple.com/macos/)
 [![bash](https://img.shields.io/badge/GNU-Bash-4eaa25?logo=gnubash)](https://www.gnu.org/software/bash/)
 [![PowerShell](https://img.shields.io/badge/PowerShell-7-26405f?logo=powershell)](https://github.com/PowerShell/PowerShell)
 
