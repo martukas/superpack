@@ -6,7 +6,6 @@ from typing import List
 
 
 class MetaPackage:
-
     class Type(Enum):
         none = 0
         posix = 1
@@ -16,7 +15,7 @@ class MetaPackage:
         winget = 5
 
         def __str__(self):
-            return f'{self.name}'
+            return f"{self.name}"
 
     def __init__(self):
         self.id: str = ""
@@ -28,23 +27,28 @@ class MetaPackage:
         self.install_script: str = ""
 
     def __repr__(self) -> str:
-        return "%s(id=%r, category=%r, installed=%r, type=%r, description=%r, " \
-               "check_script=%r, install_script=%r)" % \
-            (self.__class__.__name__,
-             self.id,
-             self.category,
-             self.installed,
-             self.type,
-             self.description,
-             self.check_script,
-             self.install_script)
+        return (
+            "%s(id=%r, category=%r, installed=%r, type=%r, description=%r, "
+            "check_script=%r, install_script=%r)"
+            % (
+                self.__class__.__name__,
+                self.id,
+                self.category,
+                self.installed,
+                self.type,
+                self.description,
+                self.check_script,
+                self.install_script,
+            )
+        )
 
     def __str__(self) -> str:
-        return \
-                f"{self.id:>20} " + \
-                (":heavy_check_mark:" if self.installed else " ") + \
-                f" {repr(self.description):>40} {str(self.category):<12}" + \
-                f" {str(self.type)}[{repr(self.check_script)}, {repr(self.install_script)}]"
+        return (
+            f"{self.id:>20} "
+            + (":heavy_check_mark:" if self.installed else " ")
+            + f" {repr(self.description):>40} {str(self.category):<12}"
+            + f" {str(self.type)}[{repr(self.check_script)}, {repr(self.install_script)}]"
+        )
 
 
 def from_yaml(data: yaml, template: MetaPackage = MetaPackage()):

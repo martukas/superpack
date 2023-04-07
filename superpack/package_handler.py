@@ -42,21 +42,25 @@ class AptHandler:
     def check(package: MetaPackage) -> None:
         all_packages = [
             a.split()
-            for a in shell_wrapper.run_get_posix("dpkg --get-selections").split('\n')
+            for a in shell_wrapper.run_get_posix("dpkg --get-selections").split("\n")
             if len(a)
         ]
-        package.installed = any(t[0] == package.id and t[-1] == "install" for t in all_packages)
+        package.installed = any(
+            t[0] == package.id and t[-1] == "install" for t in all_packages
+        )
 
     @staticmethod
     def check_all(packages: List[MetaPackage]) -> None:
         all_packages = [
             a.split()
-            for a in shell_wrapper.run_get_posix("dpkg --get-selections").split('\n')
+            for a in shell_wrapper.run_get_posix("dpkg --get-selections").split("\n")
             if len(a)
         ]
         for package in packages:
             if package.type == MetaPackage.Type.apt:
-                package.installed = any(t[0] == package.id and t[-1] == "install" for t in all_packages)
+                package.installed = any(
+                    t[0] == package.id and t[-1] == "install" for t in all_packages
+                )
 
 
 class SnapHandler:
@@ -87,10 +91,12 @@ class PowerShellHandler:
 
     @staticmethod
     def run(script: str) -> None:
-        commands = [script,
-                    "Write-Host ' '",
-                    "Write-Host -NoNewLine 'Press any key to continue...'",
-                    "$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')"]
+        commands = [
+            script,
+            "Write-Host ' '",
+            "Write-Host -NoNewLine 'Press any key to continue...'",
+            "$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')",
+        ]
         shell_wrapper.run_interactive_pwsh(";".join(commands))
 
     @staticmethod

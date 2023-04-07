@@ -11,12 +11,9 @@ import sys
 
 
 class MyApp(App):
-
     TITLE = "SuperPack Meta-package Utility"
     CSS_PATH = "superpack.css"
-    BINDINGS = [
-        ("q", "quit", "Quit")
-    ]
+    BINDINGS = [("q", "quit", "Quit")]
 
     manifest: List
 
