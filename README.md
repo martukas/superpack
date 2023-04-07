@@ -1,5 +1,7 @@
-# SuperPack 
+# SuperPack
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/martukas/superpack/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/martukas/superpack/tree/main)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Debian](https://img.shields.io/badge/-Debian-A81D33?logo=debian)](https://www.debian.org/)
 [![Windows10](https://img.shields.io/badge/-Windows-0078D6?logo=windows)](https://www.microsoft.com/en-us/software-download/windows10%20)
 [![macOS](https://img.shields.io/badge/-macOS-222222?logo=apple)](https://www.apple.com/macos/)
@@ -7,7 +9,7 @@
 [![PowerShell](https://img.shields.io/badge/PowerShell-7-26405f?logo=powershell)](https://github.com/PowerShell/PowerShell)
 
 
-This is a custom package management and bundled installation utility for all desktop platforms. If you find yourself installing the same sets of software on every machine, this, in conjunction with something like [dotbot](https://github.com/anishathalye/dotbot/) might be the right solution for you. Which is [exactly](https://github.com/martukas/dotfiles) how I use it. 
+This is a custom package management and bundled installation utility for all desktop platforms. If you find yourself installing the same sets of software on every machine, this, in conjunction with something like [dotbot](https://github.com/anishathalye/dotbot/) might be the right solution for you. Which is [exactly](https://github.com/martukas/dotfiles) how I use it.
 
 ![screenshot](screenshot.png)
 
@@ -19,7 +21,7 @@ This is a custom package management and bundled installation utility for all des
 - [Package definitions](#package-definitions)
 - [Examples](examples)
 - [Implementation](#implementation)
-- [Roadmap](#roadmap)
+- [Contributing](#contributing)
 
 ---
 
@@ -39,7 +41,7 @@ This solves my particular use case:
 
 ## Limitations
 
-It does NOT in any way adapt packages from one OS to another. 
+It does NOT in any way adapt packages from one OS to another.
 
 It does NOT provide any all-encompassing repository nor does it search the wrapped repositories for existing packages.  It's your responsibility to find the packages you need and describe them in your own manifest.
 
@@ -159,16 +161,21 @@ The YAML file may consist of any number of sections, each with a `packages:` arr
     descr: Remmina remote desktop client
 ```
 
-This will create 2 packages, both of which will be installed with "apt" and both will belong to the "dev-admin" category. Their id's will differ. One of them also ommits the `descr` field. Each individual package definition in the section can still override the defaults, but this might make reading and maintaining it more confusing. Sections and defaults allow for more concise manifests. 
+This will create 2 packages, both of which will be installed with "apt" and both will belong to the "dev-admin" category. Their id's will differ. One of them also ommits the `descr` field. Each individual package definition in the section can still override the defaults, but this might make reading and maintaining it more confusing. Sections and defaults allow for more concise manifests.
 
 
 ## Implementation
 
 I am mainly using [textual](https://github.com/textualize/textual/) for the UI, and a bit of [rich](https://github.com/Textualize/rich) for debug output.
 
-## Future improvements
+## Contributing
 
 New features will be implemented as I personally find need for them. Help is welcome.
+
+Please install [pre-commit](https://pre-commit.com/) on your system and run this in the repo:
+```shell
+pre-commit install
+```
 
 <details>
 <summary>Roadmap</summary>
@@ -176,10 +183,11 @@ New features will be implemented as I personally find need for them. Help is wel
 * make uninstall/remove possible
 * install multiple packages at once, after marking them as targets in UI
 Here are some features/ideas I would like to implement if I ever get around to it:
-* one package definition can reference multiple alternative managers, so that e.g. one manifest can be kept for all possible systems. Not sure this is needed.
 * Function to update/upgrade some or all packages
 * More and better keybindings
+* Unit tests
 * make sure this deploys as proper Python package
+* one package definition can reference multiple alternative managers, so that e.g. one manifest can be kept for all possible systems. Not sure this is needed.
 * Handlers for macOS
 * Handlers for other Linux distros
 </details>
