@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   pre-commit-checks:
     docker:
-      - image: cimg/python:3.11.2
+      - image: cimg/python:3.10.7
     steps:
       - checkout
       - run:
@@ -20,6 +20,6 @@ jobs:
             pre-commit run --show-diff-on-failure --files $changed_files
 
 workflows:
-  commit:
+  ci-tests:
     jobs:
       - pre-commit-checks
