@@ -33,10 +33,9 @@ class AptHandler:
 
     @staticmethod
     def install(package: MetaPackage) -> None:
-        script = f"sudo apt --yes install {package.id}"
+        PosixHandler.run(f"sudo apt --yes install {package.id}")
         if package.install_script:
-            script += " && " + package.install_script
-        PosixHandler.run(script)
+            PosixHandler.run(package.install_script)
 
     @staticmethod
     def check(package: MetaPackage) -> None:
@@ -69,9 +68,9 @@ class SnapHandler:
     @staticmethod
     def install(package: MetaPackage) -> None:
         script = f"snap install {package.id}"
+        PosixHandler.run(f"snap install {package.id}")
         if package.install_script:
-            script += " && " + package.install_script
-        PosixHandler.run(script)
+            PosixHandler.run(package.install_script)
 
     @staticmethod
     def check(package: MetaPackage) -> None:
