@@ -1,0 +1,15 @@
+[project]
+name = "superpack"
+version = "0.1.0"
+description = "Meta-package utility with TUI for cross-platform package selection"
+requires-python = ">=3.10"
+dependencies = [
+    "textual==0.37.1",
+    "rich",
+    "pyyaml",
+]
+
+[dependency-groups]
+dev = [
+    "textual[dev]==0.37.1",
+]
